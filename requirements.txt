@@ -12,5 +12,5 @@ requests
 streamlit_lottie
 librosa
 pydub
-libportaudio2
 PortAudio
+libportaudio2

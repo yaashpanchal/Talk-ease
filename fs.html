@@ -6,7 +6,7 @@
     <title>Fluency Score</title>
 </head>
 <body>
-     <p id="fluency_score"></p>
+     <pre id="fluency_score"></pre>
 <script>
     const urlParams = new URLSearchParams(window.location.search);
     const fluencyScore = urlParams.get('fluency_score');
@@ -14,7 +14,7 @@
     if (fluencyScore) {
     	const fluencyScoreElement = document.getElementById('fluency_score');
 	const score = JSON.parse(fluencyScore);
-        fluencyScoreElement.innerHTML = 'Fluency Score: ' + JSON.stringify(score) + '%';
+        fluencyScoreElement.innerHTML = JSON.stringify(score);
     }
 </script>
 </body>

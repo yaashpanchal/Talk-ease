@@ -44,11 +44,11 @@ def record():
     fs = 16000  # sample rate 16000 Hz
     recording = sd.rec(int(SAMPLE_TIME * fs), samplerate=fs, channels=1)
     sd.wait()
-    sc.io.wavfile.write(r'C:\Users\Lenovo\Desktop\Speech\datasets\stuttering\dub\Logue-master\output.wav', fs, recording)
+    sc.io.wavfile.write('output.wav', fs, recording)
 
     # Convert WAV to FLAC using pydub
-    sound = AudioSegment.from_wav(r'C:\Users\Lenovo\Desktop\Speech\datasets\stuttering\dub\Logue-master\output.wav')
-    sound.export(r'C:\Users\Lenovo\Desktop\Speech\datasets\stuttering\dub\Logue-master\output.flac', format='flac')
+    sound = AudioSegment.from_wav('output.wav')
+    sound.export('output.flac', format='flac')
 
     print("record ended")
 
@@ -202,7 +202,7 @@ with st.container():
                 wav_bytes = stream.read()
             # st.audio(wav_bytes, format='audio/wav')
             data, samplerate = sf.read(io.BytesIO(wav_bytes))
-            sf.write(r'C:\Users\Lenovo\Desktop\Speech\datasets\stuttering\dub\Logue-master\stereo.flac', data, samplerate)
+            sf.write('stereo.flac', data, samplerate)
 
             st.session_state.finish_record_start = True
 
@@ -220,12 +220,12 @@ with st.container():
                 sound = AudioSegment.from_file('stereo.flac')
                 sound.export('output.flac', format='flac')
 
-                audio, sr = sf.read(r'C:\Users\Lenovo\Desktop\Speech\datasets\stuttering\dub\Logue-master\output.flac')
-                sf.write(r'C:\Users\Lenovo\Desktop\Speech\datasets\stuttering\dub\Logue-master\output.wav', audio, sr, 'PCM_16')
+                audio, sr = sf.read('output.flac')
+                sf.write('output.wav', audio, sr, 'PCM_16')
 
                 x, sr = librosa.load('output.wav', sr=48000)
                 y = librosa.resample(x, 48000, 16000)
-                sf.write(r'C:\Users\Lenovo\Desktop\Speech\datasets\stuttering\dub\Logue-master\output.flac', y, 16000)
+                sf.write('output.flac', y, 16000)
 
                 t, t_s = phodel.getTranscription(SAMPLE_PARAGRAPH)
                 phoenemes = phodel.getPhonemes(t, t_s)
@@ -257,8 +257,8 @@ with st.container():
         #score_json = json.dumps(fluency_score)
         #with open('fluency.json', 'w') as f:
         #    f.write(score_json)
-        phoneme_word_url = 'http://localhost:8000/phoneme.html?generated_words=' + json.dumps(generated_words)
-        fluency_page_url = 'http://localhost:8000/fs.html?fluency_score=' + str(fluency_score)
+        phoneme_word_url = 'https://talk-ease.streamlit.app/phoneme.html?generated_words=' + json.dumps(generated_words)
+        fluency_page_url = 'https://talk-ease.streamlit.app/fs.html?fluency_score=' + str(fluency_score)
         #st.write("Phonemes you stuttered on:")
         #st.text(st.session_state.phoenemes[0])  # Task: show phonemes
         #st.write("Fluency score out of 100(The higher you get, the less you stuttered):" + str(int(st.session_state.phoenemes[1] * 100)))

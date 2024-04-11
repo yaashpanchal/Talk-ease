@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phoneme</title>
+</head>
+<body>
+     <p id="generated_words"></p
+<script>
+	const urlParams = new URLSearchParams(window.location.search);
+        const fluencyScore = urlParams.get('generated_words');
+	if (generatedWordsJson) {
+		const generatedWordsElement = document.getElementById('generated_words');
+		const generatedWords = JSON.parse(generatedWordsJson);
+		generatedWordsElement.innerHTML = 'Generated Words: ' + JSON.stringify(generatedWords);
+	}
+</script>
+</body>
+</html>

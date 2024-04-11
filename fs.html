@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluency Score</title>
+</head>
+<body>
+     <p id="fluency_score"></p>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const fluencyScore = urlParams.get('fluency_score');
+    const score = JSON.parse(fluencyScore);
+    if (fluencyScore) {
+    	const fluencyScoreElement = document.getElementById('fluency_score');
+	const score = JSON.parse(fluencyScore);
+        fluencyScoreElement.innerHTML = 'Fluency Score: ' + JSON.stringify(score) + '%';
+    }
+</script>
+</body>
+</html>

@@ -12,6 +12,5 @@ requests
 streamlit_lottie
 librosa
 pydub
-libasound-dev
 libportaudio2
 PortAudio

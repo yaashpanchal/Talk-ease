@@ -12,3 +12,4 @@ requests
 streamlit_lottie
 librosa
 pydub
+PortAudio

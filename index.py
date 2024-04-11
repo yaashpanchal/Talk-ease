@@ -1,10 +1,8 @@
-from itertools import count
 import streamlit as st
 import sounddevice as sd
 import scipy as sc
 import soundfile as sf
 import numpy as np
-from multiprocessing import Process
 import requests
 from streamlit_lottie import st_lottie
 import pickle

@@ -12,6 +12,5 @@ requests
 streamlit_lottie
 librosa
 pydub
-PortAudio
 libportaudio2
 phonemizer

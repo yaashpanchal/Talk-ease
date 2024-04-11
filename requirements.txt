@@ -13,4 +13,3 @@ streamlit_lottie
 librosa
 pydub
 phonemizer
-python-espeak

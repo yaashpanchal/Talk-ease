@@ -3,7 +3,6 @@ datasets
 torch
 eng_to_ipa
 soundfile
-itertools
 streamlit
 sounddevice
 scipy

@@ -8,7 +8,6 @@ sounddevice
 scipy
 soundfile
 numpy
-multiprocessing
 requests
 streamlit_lottie
 pickle

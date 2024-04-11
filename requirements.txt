@@ -10,7 +10,6 @@ soundfile
 numpy
 requests
 streamlit_lottie
-pickle
 random
 os
 BytesIO

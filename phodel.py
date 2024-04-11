@@ -1,27 +1,47 @@
-from transformers import Wav2Vec2Processor, Wav2Vec2ForCTC
-from datasets import load_dataset
+import requests
+import json
 import torch
 import eng_to_ipa as ipa
 import soundfile as sf
-#import fairseq
-#from fairseq.optim.fairseq_optimizer import FairseqOptimizer
-#from fairseq.criterion import FairseqCriterion, LabelSmoothedCrossEntropyCriterion
 
-
-processor = Wav2Vec2Processor.from_pretrained("facebook/wav2vec2-lv-60-espeak-cv-ft")
-model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-lv-60-espeak-cv-ft")
 def map_to_array(batch):
     speech_array, _ = sf.read(batch)
     return speech_array
 
 def getTranscription(originalText):
-    data = map_to_array('output.flac')  
-    input_values = processor(data, return_tensors="pt").input_values
-    with torch.no_grad():
-        logits = model(input_values).logits
-    predicted_ids = torch.argmax(logits, dim=-1)
-    transcription_s = processor.batch_decode(predicted_ids)
-    transcription  = [ipa.convert(originalText)]
+    # Replace this with the URL of your deployed model on Hugging Face's Inference API
+    inference_api_url = "https://api-inference.huggingface.co/models/facebook/wav2vec2-lv-60-espeak-cv-ft"
+
+    # Load the audio file
+    data = map_to_array('output.flac')
+
+    # Prepare the input for the Inference API
+    input_data = json.dumps({
+        "inputs": {
+            "source": data.tolist()
+        }
+    })
+
+    # Send a POST request to the Inference API
+    headers = {"Authorization": "Bearer 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", "Content-Type": "application/json"}
+    try:
+        response = requests.post(inference_api_url, headers=headers, data=input_data)
+        response.raise_for_status()
+    except requests.exceptions.RequestException as e:
+        print(e)
+        return [], []
+
+    # Process the response
+    response_data = response.json()
+    if 'errors' in response_data:
+        print(response_data['errors'])
+        return [], []
+
+    transcription_s = response_data[0]['transcription']
+
+    # Convert the original text to IPA
+    transcription = [ipa.convert(originalText)]
+
     return transcription, transcription_s
 
 def getPhonemes(trans, trans_s):

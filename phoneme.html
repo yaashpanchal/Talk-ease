@@ -6,14 +6,14 @@
     <title>Phoneme</title>
 </head>
 <body>
-     <p id="generated_words"></p
+     <pre id="generated_words"></pre>
 <script>
 	const urlParams = new URLSearchParams(window.location.search);
         const fluencyScore = urlParams.get('generated_words');
 	if (generatedWordsJson) {
 		const generatedWordsElement = document.getElementById('generated_words');
 		const generatedWords = JSON.parse(generatedWordsJson);
-		generatedWordsElement.innerHTML = 'Generated Words: ' + JSON.stringify(generatedWords);
+		generatedWordsElement.innerHTML = JSON.stringify(generatedWords);
 	}
 </script>
 </body>

@@ -23,7 +23,7 @@ def getTranscription(originalText):
     })
 
     # Send a POST request to the Inference API
-    headers = {"Authorization": "Bearer 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", "Content-Type": "application/json"}
+    headers = {"Authorization": "Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "Content-Type": "application/json"}
     try:
         response = requests.post(inference_api_url, headers=headers, data=input_data)
         response.raise_for_status()

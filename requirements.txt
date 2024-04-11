@@ -10,8 +10,6 @@ soundfile
 numpy
 requests
 streamlit_lottie
-random
-os
 BytesIO
 io
 streamlit.components.v1

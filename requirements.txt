@@ -12,4 +12,3 @@ requests
 streamlit_lottie
 librosa
 pydub
-json

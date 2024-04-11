@@ -10,7 +10,6 @@ soundfile
 numpy
 requests
 streamlit_lottie
-streamlit.components.v1
 librosa
 pydub
 json

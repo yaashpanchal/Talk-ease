@@ -165,19 +165,18 @@ u {
 with st.container():
     col1, col2 = st.columns(2)
     with col1:
-        st_lottie(book_animation)
+        st.image('logo.svg', width=48)
     with col2:
         st.write("")
         st.write("")
         st.write("")
         st.write("")
-        st.write("")
-        st.write("")
-        st.title("Talk-ease")
-        st.caption("Speech Therapist")
+        st.title("Assessment")
 
 # Task: Intro (maybe use card)
-st.write("Talk-ease is a digital speech therapist that helps stutterers become better at speaking.")
+st.write("Welcome to the Speech Assessment!!")
+st.write("")
+st.write("Purpose: The purpose of this assessment is to help us evaluate and improve your speech fluency and clarity. This short assessment will help us understand your speech patterns and recommend personalized exercises in our therapy program.")
 
 # step 1
 with st.container():
@@ -185,9 +184,12 @@ with st.container():
                        expanded=st.session_state.read_expended
                        )
     with read:
-        st.title("Read 📖")
-        st.markdown("Hello! Welcome to the first step of the therapy. In this section, please read the following paragraph so that we can detect which <u>phonemes</u> you struggle to pronounce. The paragraph is designed to test all the phonemes, so it may not make semantic sense. Please relax and click the 'Start Recording' button and start speaking when you are ready. Click 'Stop' when you finish talking. Click 'Reset' if you want to start over. Click 'Download' if you want to hear what you said. Finally, click 'Submit' button to sumbit your sound file to our slutter phonemes detector.", unsafe_allow_html=True)
-        st.markdown("<strong>" + SAMPLE_PARAGRAPH + "</strong>", unsafe_allow_html=True)
+        st.title("Let's start the assessment!!")
+        st.markdown("<strong>Instructions:</strong>", unsafe_allow_html=True)
+        st.markdown('- Read the given paragraph.')
+        st.markdown('- Maintain a regular pace.')
+        st.markdown('- Stay relaxed.')
+        st.markdown("- Don't worry about stuttering.") st.markdown("<strong>" + SAMPLE_PARAGRAPH + "</strong>", unsafe_allow_html=True)
         # optional task: can add countdown feature on button
         # optional task: allow user to download the recorded audio
         # record()
@@ -244,14 +246,21 @@ with st.container():
                        expanded=st.session_state.analyze_expended
                        )
     with read:
-        st.title("Analyze 📋")
+        st.title("Analyze")
         st.write("Words you stuttered on:")
         st.markdown(predict_stutter(), unsafe_allow_html=True)  # Task: underline words stuttered on
         stuttered_paragraph = predict_stutter()
         fluency_score = int(st.session_state.phoenemes[1] * 100)
-        #phoneme_list = st.session_state.phoenemes[0]
+        phoneme_list = st.session_state.phoenemes[0]
+
         generated_words = generate_words_for_phonemes(st.session_state.phoenemes[0])
         generated_words_json = json.dumps(generated_words)
+
+        st.write("Phonemes you stuttered on:")
+        st.text(st.session_state.phoenemes[0])  # Task: show phonemes
+        st.write("Words based on phonemes you stuttered on:")
+        st.text(generate_words_for_phonemes(st.session_state.phoenemes[0])
+        st.write("Fluency score out of 100(The higher you get, the less you stuttered):" + str(int(st.session_state.phoenemes[1] * 100)))
 
         # Get fluency score
         #score_json = json.dumps(fluency_score)
